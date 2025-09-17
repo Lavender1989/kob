@@ -1,36 +1,18 @@
 <template>
-  <div>
-    <div>Bot昵称：{{bot_name}}</div>
-    <div>Bot战力：{{bot_rating}}</div>
-  </div>
-
+  <NavBar> </NavBar> <!-- 替换之前的占位符 -->
   <router-view></router-view>
 </template>
 
 <script>
-import $ from 'jquery';
-import { ref } from 'vue';  // 定义变量导入
+import NavBar from '@/components/NavBar.vue'
+/* 旧版本使用
+import NavBar from './components/NavBar.vue'
+*/
+import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/js/bootstrap"
 export default {
-  name: 'App',
-  setup: () => {
-    let bot_name = ref("");  // 定义bot昵称
-    let bot_rating = ref(""); // 定义bot战力
-
-    // 定义ajax请求(输入后端链接)
-    $.ajax({
-      url: "http://127.0.0.1:3000/pk/getbotinfo/",
-      type: "get",
-      success: resp => {
-        console.log(resp); // 输出查看获取到的
-        bot_name.value = resp.name;
-        bot_rating.value = resp.rating;
-      }
-    }
-    )
-    return {
-      bot_name,
-      bot_rating
-    }
+  components: {
+    NavBar
   }
 }
 </script>
@@ -38,7 +20,7 @@ export default {
 
 <style>
 body{
-  background-image: url('assets/background.png');
+  background-image: url('assets/images/background.png');
   background-size: cover; /* 背景图铺满 */
 }
 </style>
