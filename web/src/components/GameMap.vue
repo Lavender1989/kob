@@ -1,7 +1,6 @@
 <template>
   <div ref="parent" class="gamemap">
-    <canvas ref="canvas">
-
+    <canvas ref="canvas" tabindex="0"> <!-- tabindex="0"可以输入用户操作 -->
     </canvas>
   </div>
 </template>

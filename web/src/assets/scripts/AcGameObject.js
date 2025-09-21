@@ -34,6 +34,7 @@ let last_timestamp; // 上一次执行的时刻
 
 
 const step = timestamp => {
+    // 求出当前帧和上一帧的时间间隔(ms)
     for (let obj of AC_GAME_OBJECTS) {  // 使用of遍历的是值
         if (!obj.has_called_start) {
             obj.has_called_start = true;
