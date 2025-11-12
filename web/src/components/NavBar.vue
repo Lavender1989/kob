@@ -18,10 +18,10 @@
           <router-link :class="route_name == 'ranklist_index' ? 'nav-link active' : 'nav-link'" :to="{name: 'ranklist_index'}">排行榜</router-link>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" v-if="$store.state.user.is_login">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            用户中心
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ $store.state.user.username }}  <!-- 如果登录了就显示用户名 -->
           </a>
           <ul class="dropdown-menu">
             <li>
@@ -29,8 +29,21 @@
                 <!-- <a class="dropdown-item" href="/user/bots/">我的Bot</a> -->
             </li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">退出</a></li>
+            <li><a class="dropdown-item" href="#" @click="logout">退出</a></li>
           </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav" v-else>
+        <!-- 未登录时显示登录和注册两个按钮 -->
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'user_account_login'}" role="button">
+            登录
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'user_account_register'}" role="button">
+            注册
+          </router-link>
         </li>
       </ul>
     </div>
@@ -41,12 +54,20 @@
 <script>
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';   // 实时计算的函数
+import { useStore } from 'vuex';
 export default {
   name: 'NavBar',
   setup() {
+    const store = useStore();
     const route = useRoute();
     let route_name = computed(() => route.name);  // 当前路由的名称
-    return { route_name };
+    const logout = () => {
+        store.dispatch("logout");
+    }
+    return { 
+        route_name,
+        logout,
+    };
   }
 }
 </script>

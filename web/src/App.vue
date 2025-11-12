@@ -1,5 +1,5 @@
 <template>
-  <NavBar> </NavBar> <!-- 替换之前的占位符 -->
+  <NavBar /> <!-- 替换之前的占位符 -->
   <router-view></router-view>
 </template>
 
@@ -10,9 +10,15 @@ import NavBar from './components/NavBar.vue'
 */
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap"
+// import $ from 'jquery'
+// import { data } from 'jquery'
+
 export default {
   components: {
     NavBar
+  },
+  setup() {
+    console.log("App.vue setup 已执行")
   }
 }
 </script>
