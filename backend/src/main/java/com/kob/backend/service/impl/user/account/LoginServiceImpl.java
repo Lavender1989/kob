@@ -26,22 +26,22 @@ public class LoginServiceImpl implements LoginService {
         // 传入用户名和密码 需要先封装一下(数据库中存储不是明文)
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(username, password);
-        System.out.println("已运行");
+//        System.out.println("已运行");
 
         // 将封装好的authenticationToken进行验证，判断是否合法，非法会自动报异常
         try {
-            System.out.println("开始自动验证");
+//            System.out.println("开始自动验证");
             Authentication authenticate = authenticationManager.authenticate(authenticationToken);  // 登录失败会自动处理
             // 若合法，则将其取出并赋予用户UserDetailsImpl类中的各种属性，形成loginUser
             UserDetailsImpl loginUser = (UserDetailsImpl) authenticate.getPrincipal();
             // 单独取loginUser中的用户信息 用于生成JWT-token
             User user = loginUser.getUser();
             String jwt = JwtUtil.createJWT(user.getId().toString());
-            System.out.println("已经生成好jwt_token了");
+//            System.out.println("已经生成好jwt_token了");
             // 将生成的jwt-token传回controller层
             map.put("error_message", "success");
             map.put("token", jwt);
-            System.out.println("已经返回了map");
+//            System.out.println("已经返回了map");
             return map;
         } catch (Exception e) {
             map.put("error_message", "账号不存在，请先注册一个账号");

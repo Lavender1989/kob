@@ -33,7 +33,7 @@
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav" v-else>
+      <ul class="navbar-nav" v-else-if="!$store.state.user.pulling_info">
         <!-- 未登录时显示登录和注册两个按钮 -->
         <li class="nav-item">
           <router-link class="nav-link" :to="{name: 'user_account_login'}" role="button">

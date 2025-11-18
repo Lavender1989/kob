@@ -7,6 +7,7 @@ export default {
         photo: "",
         token: "", // jwt token
         is_login: false,
+        pulling_info: true, // 是否正在从云端拉取信息
     },
     getters: {
     },
@@ -27,6 +28,9 @@ export default {
             state.photo = "";
             state.token = "";
             state.is_login = false; 
+        },
+        updatePullinfInfo(state, pulling_info) {
+            state.pulling_info = pulling_info;
         }
     },
     actions: {
@@ -41,6 +45,7 @@ export default {
                 dataType: "json",  // 告诉 jQuery 后端返回 JSON
                 success(resp) {
                     if (resp.error_message === "success") {
+                        localStorage.setItem("jwt_token", resp.token);
                         // error_message,token都是后端定义的
                         context.commit("updateToken", resp.token);  
                         // 调用mutations函数要用commit和字符串
@@ -48,8 +53,7 @@ export default {
                     } else {
                         data.error(resp);
                         // 这里的success和error都是前端定义的(store.dispatch)
-                    }
-                    
+                    }     
                 },
                 error(resp) {
                     data.error(resp);
@@ -81,6 +85,7 @@ export default {
             });
         },
         logout(context) {
+            localStorage.removeItem("jwt_token");
             context.commit("logout");
         }   
     },

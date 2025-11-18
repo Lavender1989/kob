@@ -20,9 +20,7 @@ public class LoginController {
         System.out.println(map);
         String username = map.get("username");
         String password = map.get("password");
-        System.out.println("已经获取到用户名和密码");
         Map<String, String> map2 = loginService.getToken(username, password);
-        System.out.println("返回map:" + map2);
         return loginService.getToken(username, password);
     }
 

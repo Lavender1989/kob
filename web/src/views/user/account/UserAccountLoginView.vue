@@ -1,5 +1,5 @@
 <template>
-    <ContenField> 
+    <ContenField v-if="!$store.state.user.pulling_info"> 
         <div class="row justify-content-md-center">
             <div class="col-3">
                 <form @submit.prevent="login">  <!-- 阻止表单默认提交行为, 页面不会刷新或跳转 -->
@@ -34,6 +34,29 @@ export default {
     let username = ref("");
     let password = ref("");
     let error_message = ref("");
+    // let show_content = ref(false); // 默认不展示
+
+    const jwt_token = localStorage.getItem("jwt_token");
+    if (jwt_token) {
+      store.commit("updateToken", jwt_token);
+      // 验证是否合法
+      store.dispatch("getinfo", {
+        success(){
+            router.push({name: "home"});
+            store.commit("updatePullinfInfo", false);
+        }, 
+        error() {
+            // jwt_token过期了
+            // show_content.value = true;
+            store.commit("updatePullinfInfo", false);
+        }
+      }) 
+    } else {
+        // 没有jwt_token
+        // show_content.value = true;
+        store.commit("updatePullinfInfo", false);
+        console.log(store.state.user.pulling_info);
+    }
 
     // 定义一个触发函数 如果点击了就返回
     const login = () => {
@@ -45,7 +68,6 @@ export default {
                 store.dispatch("getinfo", {
                     success() {
                         router.push({ name: "home" });
-                        console.log(store.state.user);
                     },
                 });
             },
@@ -59,6 +81,7 @@ export default {
         password,
         error_message,
         login,
+        // show_content,
     }
 
   }

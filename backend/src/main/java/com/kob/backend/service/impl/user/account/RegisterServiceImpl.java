@@ -76,7 +76,7 @@ public class RegisterServiceImpl implements RegisterService {
         String photo = "https://cdn.acwing.com/media/user/profile/photo/199301_md_325a063ce0.jpg";
         User user = new User(null, username, encodePassword, photo); // id是自增的 不用传入
         userMapper.insert(user);
-        map.put("error_messgae", "success");
+        map.put("error_message", "success");
         return map;
     }
 }
