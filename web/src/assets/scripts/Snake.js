@@ -140,7 +140,7 @@ export class Snake extends AcGameObject {
             // 眼睛需要画成圆形
             const eye_x = (this.cells[0].x + this.eye_dx[this.eye_direction][i] * 0.25) * L;
             const eye_y = (this.cells[0].y + this.eye_dy[this.eye_direction][i] * 0.25) * L;
-            console.log(eye_x, eye_y);
+            // console.log(eye_x, eye_y);
             ctx.beginPath();
             ctx.arc(eye_x, eye_y, L * 0.05, 0, Math.PI * 2);
             ctx.fill();

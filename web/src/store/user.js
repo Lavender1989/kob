@@ -16,7 +16,6 @@ export default {
             state.id = user.id;
             state.username = user.username;
             state.photo = user.photo;
-            state.token = user.token;
             state.is_login = user.is_login;
         },
         updateToken(state, token) {
@@ -58,7 +57,7 @@ export default {
                 error(resp) {
                     data.error(resp);
                 }
-                });
+            });
         },
         getinfo(context, data) {
             $.ajax({
@@ -69,10 +68,11 @@ export default {
                 },
                 dataType: "json",  // 告诉 jQuery 后端返回 JSON
                 success(resp) {
+                    console.log('Getinfo API response:', resp);
                     if (resp.error_message === "success") {
                         context.commit("updateUser", {
-                        ...resp,   // 展开运算符，将resp中的所有属性都复制到user中
-                        is_login: true,
+                            ...resp,   // 展开运算符，将resp中的所有属性都复制到user中
+                            is_login: true,
                         });
                         data.success(resp);
                     } else {
