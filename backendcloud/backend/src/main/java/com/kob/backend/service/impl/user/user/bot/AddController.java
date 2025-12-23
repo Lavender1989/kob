@@ -1,4 +1,4 @@
-package com.kob.backend.controller.user.bot;
+package com.kob.backend.service.impl.user.user.bot;
 
 import com.kob.backend.service.user.Bot.AddService;
 import org.springframework.beans.factory.annotation.Autowired;

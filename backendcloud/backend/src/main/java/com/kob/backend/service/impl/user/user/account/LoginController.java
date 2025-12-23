@@ -1,4 +1,4 @@
-package com.kob.backend.controller.user.account;
+package com.kob.backend.service.impl.user.user.account;
 
 import com.kob.backend.service.user.account.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

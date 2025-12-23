@@ -21,6 +21,7 @@ export default {
   setup() {
     const store = useStore();
     store.commit("updateLoser", "none");
+    store.commit("updateIsRecord", false);
     let socket = null;
     const socketUrl = `ws://127.0.0.1:3000/websocket/${store.state.user.token}`;
     // 当前组件被挂载的时候创建连接（当前页面打开）

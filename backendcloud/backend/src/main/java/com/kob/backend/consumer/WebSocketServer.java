@@ -38,7 +38,7 @@ public class WebSocketServer {
     //需要自己实现一个函数来完成从后端向前端发信息
     private Session session = null;  // 和http不一样 是websocket中的一个包
     // 每个链接使用session维护
-    private static UserMapper userMapper;
+    public static UserMapper userMapper;
     public static RecordMapper recordMapper;
     private static BotMapper botMapper;
     public static RestTemplate restTemplate;
